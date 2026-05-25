@@ -1,0 +1,7 @@
+POST http://localhost:3333/whatsapp/send-message
+Content-Type: application/json
+
+{
+  "number": "193983123965",
+  "text": "Mensagem enviada via API"
+}

@@ -1,0 +1,22 @@
+services:
+  postgres:
+    container_name: postgres-ecommerce
+    image: postgres:16-alpine
+    env_file:
+      - .env
+
+  evolution-api:
+    container_name: evolution_api
+    image: evoapicloud/evolution-api:latest
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env
+    volumes:
+      - evolution_instances:/evolution/instances
+    depends_on:
+      - postgres
+
+volumes:
+  evolution_instances:
+    name: evolution-api-data
