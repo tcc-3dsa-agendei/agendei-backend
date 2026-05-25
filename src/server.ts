@@ -1,7 +1,5 @@
-import { logger } from "@/lib/logger"
 import { sendWhatsappMessage } from "@/routes/whatsapp-message"
 import cors from "@elysiajs/cors"
-import consola from "consola"
 import Elysia from "elysia"
 
 export const app = new Elysia().use(
@@ -14,6 +12,6 @@ export const app = new Elysia().use(
   })
     .use(sendWhatsappMessage)
     .listen(3333, ({ url }) => {
-      logger.error(`Servidor rodando: ${url}`)
+      console.log(`Servidor rodando: ${url}`)
     })
 )
