@@ -33,7 +33,6 @@
   "dependencies": {
     "@better-fetch/fetch": "1.1.21",
     "@elysiajs/cors": "1.4.2",
-    "consola": "3.4.2",
     "elysia": "1.4.28"
   }
 }
