@@ -1,12 +1,10 @@
-import { sendWhatsappMessage } from "@/http/whatsapp-message"
-import { env } from "@/lib/env"
-import { prisma } from "@/prisma"
-import { systemMessage } from "@/utils/system-message"
-import { isValidMobilePhone } from "@brazilian-utils/brazilian-utils"
+import { env } from "@/shared/env"
+import { prisma } from "@/shared/database/prisma"
 import { prismaAdapter } from "better-auth/adapters/prisma"
 import { betterAuth } from "better-auth/minimal"
 import { nextCookies } from "better-auth/next-js"
 import { phoneNumber } from "better-auth/plugins"
+import { phoneValidator } from "@/shared/utils/phone-validator"
 
 export const auth = betterAuth({
   baseURL: env.BETTER_AUTH_URL,
@@ -40,6 +38,17 @@ export const auth = betterAuth({
         type: "string",
         required: true,
         input: true
+      },
+      company_number: {
+        type: "string",
+        required: true,
+        input: true,
+        unique: true
+      },
+      company_state: {
+        type: "string",
+        required: true,
+        input: true
       }
     }
   },
@@ -47,23 +56,16 @@ export const auth = betterAuth({
     nextCookies(),
     phoneNumber({
       requireVerification: true,
-      phoneNumberValidator: (phone: string) => {
-        const normalizedPhone = phone.replace(/\D/g, "")
-
-        const brPhone = normalizedPhone.startsWith("55")
-          ? normalizedPhone.slice(2)
-          : normalizedPhone
-
-        return isValidMobilePhone(brPhone)
-      },
-      sendOTP: async ({ code, phoneNumber }) => {
-        await sendWhatsappMessage({
-          number: phoneNumber,
-          text: systemMessage(
-            `Insira o código a seguir para confirmar seu número no Agendei: ${code}`,
-            "validation"
-          )
-        })
+      phoneNumberValidator: (phone: string) => phoneValidator(phone),
+      sendOTP: async (_data, ctx) => {
+        console.log(ctx?.request)
+        // await sendWhatsappMessage({
+        //   number: phoneNumber,
+        //   text: systemMessage(
+        //     `Insira o código a seguir para confirmar seu número no Agendei: ${code}`,
+        //     "validation"
+        //   )
+        // })
       }
     })
   ]
