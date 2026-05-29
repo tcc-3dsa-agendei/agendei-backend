@@ -32,7 +32,7 @@ export class UnauthorizedError extends AppError {
   }
 }
 
-export class ForbbidenError extends AppError {
+export class ForbiddenError extends AppError {
   constructor(message = "Permissão necessária") {
     super(403, "FORBBIDEN", message)
   }

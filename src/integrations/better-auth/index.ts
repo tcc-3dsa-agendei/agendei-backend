@@ -5,6 +5,8 @@ import { betterAuth } from "better-auth/minimal"
 import { nextCookies } from "better-auth/next-js"
 import { phoneNumber } from "better-auth/plugins"
 import { phoneValidator } from "@/shared/utils/phone-validator"
+import { systemMessage } from "@/shared/utils/system-message"
+import { NotificationController } from "@/modules/notifications/notification.controller"
 
 export const auth = betterAuth({
   baseURL: env.BETTER_AUTH_URL,
@@ -57,15 +59,16 @@ export const auth = betterAuth({
     phoneNumber({
       requireVerification: true,
       phoneNumberValidator: (phone: string) => phoneValidator(phone),
-      sendOTP: async (_data, ctx) => {
-        console.log(ctx?.request)
-        // await sendWhatsappMessage({
-        //   number: phoneNumber,
-        //   text: systemMessage(
-        //     `Insira o código a seguir para confirmar seu número no Agendei: ${code}`,
-        //     "validation"
-        //   )
-        // })
+      sendOTP: async data => {
+        const controller = new NotificationController()
+
+        await controller.sendWhatsappNotification({
+          number: data.phoneNumber,
+          text: systemMessage(
+            `Insira o código a seguir para confirmar seu número no Agendei: ${data.code}`,
+            "validation"
+          )
+        })
       }
     })
   ]
