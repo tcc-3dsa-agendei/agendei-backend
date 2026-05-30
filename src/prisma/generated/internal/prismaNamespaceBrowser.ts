@@ -142,10 +142,6 @@ export const CompanyScalarFieldEnum = {
   userId: 'userId',
   taxId: 'taxId',
   name: 'name',
-  street: 'street',
-  district: 'district',
-  number: 'number',
-  state: 'state',
   phone: 'phone',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'

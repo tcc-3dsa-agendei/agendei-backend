@@ -96,10 +96,6 @@ model Company {
 
   taxId    String @unique
   name     String
-  street   String
-  district String
-  number   String
-  state    String
   phone    String
 
   createdAt DateTime @default(now())

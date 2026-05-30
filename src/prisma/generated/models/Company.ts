@@ -29,10 +29,6 @@ export type CompanyMinAggregateOutputType = {
   userId: string | null
   taxId: string | null
   name: string | null
-  street: string | null
-  district: string | null
-  number: string | null
-  state: string | null
   phone: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -43,10 +39,6 @@ export type CompanyMaxAggregateOutputType = {
   userId: string | null
   taxId: string | null
   name: string | null
-  street: string | null
-  district: string | null
-  number: string | null
-  state: string | null
   phone: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -57,10 +49,6 @@ export type CompanyCountAggregateOutputType = {
   userId: number
   taxId: number
   name: number
-  street: number
-  district: number
-  number: number
-  state: number
   phone: number
   createdAt: number
   updatedAt: number
@@ -73,10 +61,6 @@ export type CompanyMinAggregateInputType = {
   userId?: true
   taxId?: true
   name?: true
-  street?: true
-  district?: true
-  number?: true
-  state?: true
   phone?: true
   createdAt?: true
   updatedAt?: true
@@ -87,10 +71,6 @@ export type CompanyMaxAggregateInputType = {
   userId?: true
   taxId?: true
   name?: true
-  street?: true
-  district?: true
-  number?: true
-  state?: true
   phone?: true
   createdAt?: true
   updatedAt?: true
@@ -101,10 +81,6 @@ export type CompanyCountAggregateInputType = {
   userId?: true
   taxId?: true
   name?: true
-  street?: true
-  district?: true
-  number?: true
-  state?: true
   phone?: true
   createdAt?: true
   updatedAt?: true
@@ -188,10 +164,6 @@ export type CompanyGroupByOutputType = {
   userId: string
   taxId: string
   name: string
-  street: string
-  district: string
-  number: string
-  state: string
   phone: string
   createdAt: Date
   updatedAt: Date
@@ -223,10 +195,6 @@ export type CompanyWhereInput = {
   userId?: Prisma.StringFilter<"Company"> | string
   taxId?: Prisma.StringFilter<"Company"> | string
   name?: Prisma.StringFilter<"Company"> | string
-  street?: Prisma.StringFilter<"Company"> | string
-  district?: Prisma.StringFilter<"Company"> | string
-  number?: Prisma.StringFilter<"Company"> | string
-  state?: Prisma.StringFilter<"Company"> | string
   phone?: Prisma.StringFilter<"Company"> | string
   createdAt?: Prisma.DateTimeFilter<"Company"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Company"> | Date | string
@@ -241,10 +209,6 @@ export type CompanyOrderByWithRelationInput = {
   userId?: Prisma.SortOrder
   taxId?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  street?: Prisma.SortOrder
-  district?: Prisma.SortOrder
-  number?: Prisma.SortOrder
-  state?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -262,10 +226,6 @@ export type CompanyWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.CompanyWhereInput[]
   NOT?: Prisma.CompanyWhereInput | Prisma.CompanyWhereInput[]
   name?: Prisma.StringFilter<"Company"> | string
-  street?: Prisma.StringFilter<"Company"> | string
-  district?: Prisma.StringFilter<"Company"> | string
-  number?: Prisma.StringFilter<"Company"> | string
-  state?: Prisma.StringFilter<"Company"> | string
   phone?: Prisma.StringFilter<"Company"> | string
   createdAt?: Prisma.DateTimeFilter<"Company"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Company"> | Date | string
@@ -280,10 +240,6 @@ export type CompanyOrderByWithAggregationInput = {
   userId?: Prisma.SortOrder
   taxId?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  street?: Prisma.SortOrder
-  district?: Prisma.SortOrder
-  number?: Prisma.SortOrder
-  state?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -300,10 +256,6 @@ export type CompanyScalarWhereWithAggregatesInput = {
   userId?: Prisma.StringWithAggregatesFilter<"Company"> | string
   taxId?: Prisma.StringWithAggregatesFilter<"Company"> | string
   name?: Prisma.StringWithAggregatesFilter<"Company"> | string
-  street?: Prisma.StringWithAggregatesFilter<"Company"> | string
-  district?: Prisma.StringWithAggregatesFilter<"Company"> | string
-  number?: Prisma.StringWithAggregatesFilter<"Company"> | string
-  state?: Prisma.StringWithAggregatesFilter<"Company"> | string
   phone?: Prisma.StringWithAggregatesFilter<"Company"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Company"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Company"> | Date | string
@@ -313,10 +265,6 @@ export type CompanyCreateInput = {
   id?: string
   taxId: string
   name: string
-  street: string
-  district: string
-  number: string
-  state: string
   phone: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -331,10 +279,6 @@ export type CompanyUncheckedCreateInput = {
   userId: string
   taxId: string
   name: string
-  street: string
-  district: string
-  number: string
-  state: string
   phone: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -347,10 +291,6 @@ export type CompanyUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   taxId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  street?: Prisma.StringFieldUpdateOperationsInput | string
-  district?: Prisma.StringFieldUpdateOperationsInput | string
-  number?: Prisma.StringFieldUpdateOperationsInput | string
-  state?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -365,10 +305,6 @@ export type CompanyUncheckedUpdateInput = {
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   taxId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  street?: Prisma.StringFieldUpdateOperationsInput | string
-  district?: Prisma.StringFieldUpdateOperationsInput | string
-  number?: Prisma.StringFieldUpdateOperationsInput | string
-  state?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -382,10 +318,6 @@ export type CompanyCreateManyInput = {
   userId: string
   taxId: string
   name: string
-  street: string
-  district: string
-  number: string
-  state: string
   phone: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -395,10 +327,6 @@ export type CompanyUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   taxId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  street?: Prisma.StringFieldUpdateOperationsInput | string
-  district?: Prisma.StringFieldUpdateOperationsInput | string
-  number?: Prisma.StringFieldUpdateOperationsInput | string
-  state?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -409,10 +337,6 @@ export type CompanyUncheckedUpdateManyInput = {
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   taxId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  street?: Prisma.StringFieldUpdateOperationsInput | string
-  district?: Prisma.StringFieldUpdateOperationsInput | string
-  number?: Prisma.StringFieldUpdateOperationsInput | string
-  state?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -428,10 +352,6 @@ export type CompanyCountOrderByAggregateInput = {
   userId?: Prisma.SortOrder
   taxId?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  street?: Prisma.SortOrder
-  district?: Prisma.SortOrder
-  number?: Prisma.SortOrder
-  state?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -442,10 +362,6 @@ export type CompanyMaxOrderByAggregateInput = {
   userId?: Prisma.SortOrder
   taxId?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  street?: Prisma.SortOrder
-  district?: Prisma.SortOrder
-  number?: Prisma.SortOrder
-  state?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -456,10 +372,6 @@ export type CompanyMinOrderByAggregateInput = {
   userId?: Prisma.SortOrder
   taxId?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  street?: Prisma.SortOrder
-  district?: Prisma.SortOrder
-  number?: Prisma.SortOrder
-  state?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -548,10 +460,6 @@ export type CompanyCreateWithoutUserInput = {
   id?: string
   taxId: string
   name: string
-  street: string
-  district: string
-  number: string
-  state: string
   phone: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -564,10 +472,6 @@ export type CompanyUncheckedCreateWithoutUserInput = {
   id?: string
   taxId: string
   name: string
-  street: string
-  district: string
-  number: string
-  state: string
   phone: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -596,10 +500,6 @@ export type CompanyUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   taxId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  street?: Prisma.StringFieldUpdateOperationsInput | string
-  district?: Prisma.StringFieldUpdateOperationsInput | string
-  number?: Prisma.StringFieldUpdateOperationsInput | string
-  state?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -612,10 +512,6 @@ export type CompanyUncheckedUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   taxId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  street?: Prisma.StringFieldUpdateOperationsInput | string
-  district?: Prisma.StringFieldUpdateOperationsInput | string
-  number?: Prisma.StringFieldUpdateOperationsInput | string
-  state?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -628,10 +524,6 @@ export type CompanyCreateWithoutServicesInput = {
   id?: string
   taxId: string
   name: string
-  street: string
-  district: string
-  number: string
-  state: string
   phone: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -645,10 +537,6 @@ export type CompanyUncheckedCreateWithoutServicesInput = {
   userId: string
   taxId: string
   name: string
-  street: string
-  district: string
-  number: string
-  state: string
   phone: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -676,10 +564,6 @@ export type CompanyUpdateWithoutServicesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   taxId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  street?: Prisma.StringFieldUpdateOperationsInput | string
-  district?: Prisma.StringFieldUpdateOperationsInput | string
-  number?: Prisma.StringFieldUpdateOperationsInput | string
-  state?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -693,10 +577,6 @@ export type CompanyUncheckedUpdateWithoutServicesInput = {
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   taxId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  street?: Prisma.StringFieldUpdateOperationsInput | string
-  district?: Prisma.StringFieldUpdateOperationsInput | string
-  number?: Prisma.StringFieldUpdateOperationsInput | string
-  state?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -708,10 +588,6 @@ export type CompanyCreateWithoutSchedulesInput = {
   id?: string
   taxId: string
   name: string
-  street: string
-  district: string
-  number: string
-  state: string
   phone: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -725,10 +601,6 @@ export type CompanyUncheckedCreateWithoutSchedulesInput = {
   userId: string
   taxId: string
   name: string
-  street: string
-  district: string
-  number: string
-  state: string
   phone: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -756,10 +628,6 @@ export type CompanyUpdateWithoutSchedulesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   taxId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  street?: Prisma.StringFieldUpdateOperationsInput | string
-  district?: Prisma.StringFieldUpdateOperationsInput | string
-  number?: Prisma.StringFieldUpdateOperationsInput | string
-  state?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -773,10 +641,6 @@ export type CompanyUncheckedUpdateWithoutSchedulesInput = {
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   taxId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  street?: Prisma.StringFieldUpdateOperationsInput | string
-  district?: Prisma.StringFieldUpdateOperationsInput | string
-  number?: Prisma.StringFieldUpdateOperationsInput | string
-  state?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -788,10 +652,6 @@ export type CompanyCreateWithoutAppointmentsInput = {
   id?: string
   taxId: string
   name: string
-  street: string
-  district: string
-  number: string
-  state: string
   phone: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -805,10 +665,6 @@ export type CompanyUncheckedCreateWithoutAppointmentsInput = {
   userId: string
   taxId: string
   name: string
-  street: string
-  district: string
-  number: string
-  state: string
   phone: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -836,10 +692,6 @@ export type CompanyUpdateWithoutAppointmentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   taxId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  street?: Prisma.StringFieldUpdateOperationsInput | string
-  district?: Prisma.StringFieldUpdateOperationsInput | string
-  number?: Prisma.StringFieldUpdateOperationsInput | string
-  state?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -853,10 +705,6 @@ export type CompanyUncheckedUpdateWithoutAppointmentsInput = {
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   taxId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  street?: Prisma.StringFieldUpdateOperationsInput | string
-  district?: Prisma.StringFieldUpdateOperationsInput | string
-  number?: Prisma.StringFieldUpdateOperationsInput | string
-  state?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -918,10 +766,6 @@ export type CompanySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   userId?: boolean
   taxId?: boolean
   name?: boolean
-  street?: boolean
-  district?: boolean
-  number?: boolean
-  state?: boolean
   phone?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -937,10 +781,6 @@ export type CompanySelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   userId?: boolean
   taxId?: boolean
   name?: boolean
-  street?: boolean
-  district?: boolean
-  number?: boolean
-  state?: boolean
   phone?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -952,10 +792,6 @@ export type CompanySelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   userId?: boolean
   taxId?: boolean
   name?: boolean
-  street?: boolean
-  district?: boolean
-  number?: boolean
-  state?: boolean
   phone?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -967,16 +803,12 @@ export type CompanySelectScalar = {
   userId?: boolean
   taxId?: boolean
   name?: boolean
-  street?: boolean
-  district?: boolean
-  number?: boolean
-  state?: boolean
   phone?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type CompanyOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "taxId" | "name" | "street" | "district" | "number" | "state" | "phone" | "createdAt" | "updatedAt", ExtArgs["result"]["company"]>
+export type CompanyOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "taxId" | "name" | "phone" | "createdAt" | "updatedAt", ExtArgs["result"]["company"]>
 export type CompanyInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   services?: boolean | Prisma.Company$servicesArgs<ExtArgs>
@@ -1004,10 +836,6 @@ export type $CompanyPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     userId: string
     taxId: string
     name: string
-    street: string
-    district: string
-    number: string
-    state: string
     phone: string
     createdAt: Date
     updatedAt: Date
@@ -1442,10 +1270,6 @@ export interface CompanyFieldRefs {
   readonly userId: Prisma.FieldRef<"Company", 'String'>
   readonly taxId: Prisma.FieldRef<"Company", 'String'>
   readonly name: Prisma.FieldRef<"Company", 'String'>
-  readonly street: Prisma.FieldRef<"Company", 'String'>
-  readonly district: Prisma.FieldRef<"Company", 'String'>
-  readonly number: Prisma.FieldRef<"Company", 'String'>
-  readonly state: Prisma.FieldRef<"Company", 'String'>
   readonly phone: Prisma.FieldRef<"Company", 'String'>
   readonly createdAt: Prisma.FieldRef<"Company", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Company", 'DateTime'>
