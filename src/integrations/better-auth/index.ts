@@ -23,37 +23,6 @@ export const auth = betterAuth({
     maxPasswordLength: 64,
     autoSignIn: false
   },
-  user: {
-    additionalFields: {
-      company_taxId: {
-        type: "string",
-        required: true,
-        input: true,
-        unique: true
-      },
-      company_street: {
-        type: "string",
-        required: true,
-        input: true
-      },
-      company_district: {
-        type: "string",
-        required: true,
-        input: true
-      },
-      company_number: {
-        type: "string",
-        required: true,
-        input: true,
-        unique: true
-      },
-      company_state: {
-        type: "string",
-        required: true,
-        input: true
-      }
-    }
-  },
   plugins: [
     nextCookies(),
     phoneNumber({
