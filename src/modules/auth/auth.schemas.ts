@@ -10,12 +10,7 @@ export const loginSchema = z.strictObject({
 export const registerSchema = loginSchema.extend({
   name: z.string(),
   phone: z.string(),
-  image: z.url().optional(),
-  companyTaxId: z.string(),
-  companyStreet: z.string(),
-  companyDistrict: z.string(),
-  companyNumber: z.string(),
-  companyState: z.string()
+  image: z.url().optional()
 })
 
 export const resetPasswordSchema = z.strictObject({

@@ -28,12 +28,7 @@ export class AuthController {
         name: data.name,
         email: data.email,
         phoneNumber: data.phone,
-        password: data.password,
-        company_street: data.companyStreet,
-        company_district: data.companyDistrict,
-        company_taxId: data.companyTaxId,
-        company_state: data.companyState,
-        company_number: data.companyNumber
+        password: data.password
       }
     })
   }
