@@ -1,4 +1,4 @@
-import { env } from "@/shared/env"
+import { env } from "@/env"
 import { PrismaClient } from "@/prisma/generated/client"
 import { PrismaPg } from "@prisma/adapter-pg"
 

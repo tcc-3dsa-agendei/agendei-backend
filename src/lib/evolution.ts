@@ -1,4 +1,4 @@
-import { env } from "@/shared/env"
+import { env } from "@/env"
 import { EvolutionClient, EvolutionInstance } from "@solufy/evolution-sdk"
 
 const client = new EvolutionClient({

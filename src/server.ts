@@ -1,47 +1,36 @@
-import { authRoutes } from "@/modules/auth/auth.routes"
-import { notificationRoutes } from "@/modules/notifications/notification.routes"
-import { AppError } from "@/shared/errors/app.error"
+import { env } from "@/env"
+import { sendNotificationRoute } from "@/http/send-notification"
+import { authPlugin } from "@/plugins/auth-plugin"
 import cors from "@elysiajs/cors"
-import { APIError as BetterAuthApiError } from "better-auth"
 import Elysia from "elysia"
 
 export const app = new Elysia()
   .onError(({ code, error }) => {
-    if (code === "VALIDATION" || code === "NOT_FOUND") {
+    if (code === "VALIDATION") {
       return {
-        statusCode: error.status,
-        code,
-        message: error.message
+        message: "Dados inválidos",
+        details: error.message
       }
     }
 
-    if (error instanceof AppError) {
+    if (code === "NOT_FOUND") {
       return {
-        statusCode: error.statusCode,
-        code: error.code,
-        message: error.message
+        message: "Rota não encontrada",
+        details: error.message
       }
-    }
-
-    if (error instanceof BetterAuthApiError) {
-      return {
-        statusCode: error.statusCode,
-        code: error.body?.code,
-        message: error.message
-      }
-    }
-
-    return {
-      statusCode: 500,
-      code: "INTERNAL_ERROR",
-      message: "Erro interno do servidor"
     }
   })
   .use(
     cors({
-      allowedHeaders: ["Content-Type", "Authorization"]
+      allowedHeaders: ["Content-Type", "Authorization"],
+      maxAge: 300,
+      credentials: true,
+      methods: ["POST", "GET", "DELETE", "PATCH", "OPTIONS"],
+      origin: env.FRONTEND_URL
     })
   )
-  .use(authRoutes)
-  .use(notificationRoutes)
-  .listen(3333)
+  .use(authPlugin)
+  .use(sendNotificationRoute)
+  .listen(3333, ({ url }) => {
+    console.log(`Servidor rodando: ${url}`)
+  })
