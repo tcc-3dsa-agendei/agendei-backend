@@ -9,7 +9,9 @@ export const authPlugin = new Elysia().mount(auth.handler).macro({
       })
 
       if (!session) {
-        return status(401, "Não autorizado")
+        return status(401, {
+          message: "Não autorizado"
+        })
       }
 
       return {
