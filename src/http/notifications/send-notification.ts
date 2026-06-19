@@ -17,7 +17,7 @@ export const sendNotificationSchema = z.strictObject({
 })
 
 export const sendNotificationRoute = new Elysia().post(
-  "/notifications",
+  "/",
   async ({ body, status }) => {
     try {
       const { messageId } = await evolution.messages.sendText({
