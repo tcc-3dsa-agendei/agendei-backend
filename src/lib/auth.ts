@@ -6,7 +6,6 @@ import { nextCookies } from "better-auth/next-js"
 import { phoneNumber } from "better-auth/plugins"
 import { phoneValidator } from "@/utils/phone-validator"
 import { systemMessage } from "@/utils/system-message"
-import { sendNotification } from "@/http/send-notification"
 
 export const auth = betterAuth({
   baseURL: env.BETTER_AUTH_URL,
@@ -29,12 +28,15 @@ export const auth = betterAuth({
       requireVerification: true,
       phoneNumberValidator: (phone: string) => phoneValidator(phone),
       sendOTP: async data => {
-        await sendNotification({
-          number: data.phoneNumber,
-          text: systemMessage(
-            `Insira o código a seguir para confirmar seu número no Agendei: ${data.code}`,
-            "validation"
-          )
+        await fetch("http://localhost:3333/notifications", {
+          method: "POST",
+          body: JSON.stringify({
+            number: data.phoneNumber,
+            text: systemMessage(
+              `Insira o código a seguir para confirmar seu número no Agendei: ${data.code}`,
+              "validation"
+            )
+          })
         })
       }
     })
