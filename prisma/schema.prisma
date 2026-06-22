@@ -95,8 +95,9 @@ model Company {
   userId String @unique
 
   taxId    String @unique
-  name     String
-  phone    String
+  mame     String
+  zipCode String
+  category String
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
