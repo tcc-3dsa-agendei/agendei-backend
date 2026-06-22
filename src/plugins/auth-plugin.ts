@@ -1,7 +1,7 @@
 import { auth } from "@/lib/auth"
 import Elysia from "elysia"
 
-export const authPlugin = new Elysia().mount(auth.handler).macro({
+export const authPlugin = new Elysia().macro({
   auth: {
     resolve: async ({ request, status }) => {
       const session = await auth.api.getSession({
