@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/prisma"
 import { authPlugin } from "@/plugins/auth-plugin"
+import { safeAsync } from "@/utils/safe"
 import Elysia from "elysia"
 import z from "zod"
 
@@ -29,18 +30,26 @@ export const createScheduleRoute = new Elysia().use(authPlugin).post(
       })
     }
 
-    await prisma.schedule.create({
-      data: {
-        companyId: company.id,
-        weekDay: body.weekDay,
-        startTime: body.startTime,
-        endTime: body.endTime
-      }
-    })
+    const [error, schedule] = await safeAsync(() =>
+      prisma.schedule.create({
+        data: {
+          companyId: company.id,
+          weekDay: body.weekDay,
+          startTime: body.startTime,
+          endTime: body.endTime
+        }
+      })
+    )
 
-    return status(200, {
-      message: "Agenda criada com sucesso"
-    })
+    if (error) {
+      return status(500, {
+        message: `Erro ao criar agenda: ${error.message}`
+      })
+    }
+
+    return {
+      data: schedule
+    }
   },
   {
     auth: true,

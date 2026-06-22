@@ -36,9 +36,9 @@ export const getAllSchedulesRoute = new Elysia().use(authPlugin).get(
       })
     }
 
-    return status(200, {
-      schedules
-    })
+    return {
+      data: schedules
+    }
   },
   {
     auth: true

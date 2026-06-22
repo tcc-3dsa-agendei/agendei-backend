@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/prisma"
 import { authPlugin } from "@/plugins/auth-plugin"
+import { safeAsync } from "@/utils/safe"
 import Elysia from "elysia"
 import z from "zod"
 
@@ -43,23 +44,31 @@ export const createServiceRoute = new Elysia().use(authPlugin).post(
       })
     }
 
-    await prisma.service.create({
-      data: {
-        name: body.name,
-        durationInMinutes: body.durationInMinutes,
-        price: body.price,
-        description: body.description,
-        companyId: company.id
-      },
-      omit: {
-        companyId: true,
-        updatedAt: true,
-        id: true
-      }
-    })
+    const [error, service] = await safeAsync(() =>
+      prisma.service.create({
+        data: {
+          name: body.name,
+          durationInMinutes: body.durationInMinutes,
+          price: body.price,
+          description: body.description,
+          companyId: company.id
+        },
+        omit: {
+          companyId: true,
+          updatedAt: true,
+          id: true
+        }
+      })
+    )
+
+    if (error) {
+      return status(500, {
+        message: `Erro ao criar serviço: ${error.message}`
+      })
+    }
 
     return status(201, {
-      message: "Serviço criado com sucesso"
+      data: service
     })
   },
   {

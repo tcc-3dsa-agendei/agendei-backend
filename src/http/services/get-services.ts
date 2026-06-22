@@ -34,7 +34,7 @@ export const getServicesRoute = new Elysia().use(authPlugin).get(
     }
 
     return status(200, {
-      services
+      data: services
     })
   },
   {
