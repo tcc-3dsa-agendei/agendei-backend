@@ -2,7 +2,6 @@ import { env } from "@/env"
 import { prisma } from "@/lib/prisma"
 import { prismaAdapter } from "better-auth/adapters/prisma"
 import { betterAuth } from "better-auth/minimal"
-import { nextCookies } from "better-auth/next-js"
 import { phoneNumber } from "better-auth/plugins"
 import { phoneValidator } from "@/utils/phone-validator"
 import { systemMessage } from "@/utils/system-message"
@@ -23,7 +22,6 @@ export const auth = betterAuth({
     autoSignIn: false
   },
   plugins: [
-    nextCookies(),
     phoneNumber({
       requireVerification: true,
       phoneNumberValidator: (phone: string) => phoneValidator(phone),
