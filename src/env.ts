@@ -6,7 +6,8 @@ const envSchema = z.object({
   BETTER_AUTH_URL: z.url(),
   EVOLUTION_SERVER_URL: z.url(),
   AUTHENTICATION_API_KEY: z.uuid(),
-  FRONTEND_URL: z.url()
+  FRONTEND_URL: z.url(),
+  PORT: z.number().int().positive()
 })
 
 export const env = envSchema.parse(Bun.env)

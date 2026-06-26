@@ -1,7 +1,6 @@
 import { env } from "@/env"
 import { schedulesRoutes } from "@/http/schedules"
 import { servicesRoutes } from "@/http/services"
-import { authPlugin } from "@/plugins/auth-plugin"
 import cors from "@elysiajs/cors"
 import Elysia from "elysia"
 import { notficationsRoutes } from "@/http/notifications"
@@ -38,6 +37,6 @@ export const app = new Elysia()
   .use(schedulesRoutes)
   .use(servicesRoutes)
   .use(authRoutes)
-  .listen(3333, ({ url }) => {
+  .listen(env.PORT, ({ url }) => {
     console.log(`Servidor rodando: ${url}`)
   })
