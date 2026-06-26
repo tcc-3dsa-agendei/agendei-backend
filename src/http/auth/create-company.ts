@@ -1,6 +1,6 @@
 import { prisma } from "@/lib/prisma"
 import { authPlugin } from "@/plugins/auth-plugin"
-// import { safeAsync } from "@/utils/safe"
+import { safeAsync } from "@/utils/safe"
 import { isValidCep, isValidCnpj } from "@brazilian-utils/brazilian-utils"
 import Elysia from "elysia"
 import z from "zod"
@@ -27,7 +27,7 @@ const createCompanySchema = z.object({
 
 export const createCompanyRoute = new Elysia().use(authPlugin).post(
   "/",
-  async ({ session, status }) => {
+  async ({ session, status, body }) => {
     const hasCompany = await prisma.company.findUnique({
       where: {
         userId: session.userId
@@ -40,23 +40,27 @@ export const createCompanyRoute = new Elysia().use(authPlugin).post(
       })
     }
 
-    // const [error, company] = await safeAsync(() =>
-    //   prisma.company.create({
-    //     data: {
-    //       userId: session.userId
-    //     }
-    //   })
-    // )
+    const [error, company] = await safeAsync(() =>
+      prisma.company.create({
+        data: {
+          userId: session.userId,
+          name: body.name,
+          category: body.category,
+          zipCode: body.zipCode,
+          taxId: body.taxId
+        }
+      })
+    )
 
-    // if (error) {
-    //   return status(500, {
-    //     message: error.message
-    //   })
-    // }
+    if (error) {
+      return status(500, {
+        message: error.message
+      })
+    }
 
-    // return {
-    //   data: company
-    // }
+    return {
+      data: company
+    }
   },
   {
     body: createCompanySchema,
