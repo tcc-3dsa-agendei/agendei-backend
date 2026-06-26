@@ -3,9 +3,9 @@ import { authPlugin } from "@/plugins/auth-plugin"
 import Elysia from "elysia"
 import z from "zod"
 
-export const deleteServiceRoute = new Elysia().use(authPlugin).delete(
+export const getServiceRoute = new Elysia().use(authPlugin).get(
   "/:id",
-  async ({ params, status, session }) => {
+  async ({ session, status, params }) => {
     const company = await prisma.company.findUnique({
       where: {
         userId: session.userId
@@ -21,19 +21,30 @@ export const deleteServiceRoute = new Elysia().use(authPlugin).delete(
       })
     }
 
-    await prisma.service.delete({
+    const schedule = await prisma.schedule.findFirst({
       where: {
-        id: params.id,
-        companyId: company.id
+        companyId: company.id,
+        id: params.id
+      },
+      omit: {
+        companyId: true
       }
     })
 
-    return status(204)
+    if (!schedule) {
+      return status(404, {
+        message: "Erro ao encontrar serviço"
+      })
+    }
+
+    return {
+      data: schedule
+    }
   },
   {
+    auth: true,
     params: z.object({
       id: z.cuid2()
-    }),
-    auth: true
+    })
   }
 )

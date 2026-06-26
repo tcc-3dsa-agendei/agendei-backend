@@ -27,7 +27,7 @@ const createServiceSchema = z.strictObject({
 })
 
 export const createServiceRoute = new Elysia().use(authPlugin).post(
-  "/services",
+  "/",
   async ({ status, body, session }) => {
     const company = await prisma.company.findUnique({
       where: {
@@ -55,8 +55,7 @@ export const createServiceRoute = new Elysia().use(authPlugin).post(
         },
         omit: {
           companyId: true,
-          updatedAt: true,
-          id: true
+          updatedAt: true
         }
       })
     )

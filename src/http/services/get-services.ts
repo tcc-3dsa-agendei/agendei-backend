@@ -3,7 +3,7 @@ import { authPlugin } from "@/plugins/auth-plugin"
 import Elysia from "elysia"
 
 export const getServicesRoute = new Elysia().use(authPlugin).get(
-  "/services",
+  "/",
   async ({ status, session }) => {
     const company = await prisma.company.findUnique({
       where: {

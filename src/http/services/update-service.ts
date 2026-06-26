@@ -3,7 +3,7 @@ import { authPlugin } from "@/plugins/auth-plugin"
 import Elysia from "elysia"
 import z from "zod"
 
-export const updateServiceRoute = new Elysia().use(authPlugin).delete(
+export const updateServiceRoute = new Elysia().use(authPlugin).patch(
   "/:id",
   async ({ params, status, session, body }) => {
     const company = await prisma.company.findUnique({
