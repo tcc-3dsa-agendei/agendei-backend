@@ -95,7 +95,7 @@ model Company {
   userId String @unique
 
   taxId    String @unique
-  mame     String
+  name     String
   zipCode String
   category String
 
