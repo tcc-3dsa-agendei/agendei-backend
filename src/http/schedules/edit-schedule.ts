@@ -4,17 +4,21 @@ import { safeAsync } from "@/utils/safe"
 import Elysia from "elysia"
 import z from "zod"
 
-const createScheduleSchema = z.strictObject({
-  weekDay: z.number().int().min(0).max(6),
+const editScheduleSchema = z.strictObject({
+  weekDay: z.number().int().min(0).max(6).optional(),
   startTime: z
     .string()
-    .regex(/^([01]\d|2[0-3]):([0-5]\d)$/, "Horário inválido"),
-  endTime: z.string().regex(/^([01]\d|2[0-3]):([0-5]\d)$/, "Horário inválido")
+    .regex(/^([01]\d|2[0-3]):([0-5]\d)$/, "Horário inválido")
+    .optional(),
+  endTime: z
+    .string()
+    .regex(/^([01]\d|2[0-3]):([0-5]\d)$/, "Horário inválido")
+    .optional()
 })
 
-export const createScheduleRoute = new Elysia().use(authPlugin).post(
-  "/",
-  async ({ session, status, body }) => {
+export const editScheduleRoute = new Elysia().use(authPlugin).patch(
+  "/:id",
+  async ({ session, status, body, params }) => {
     const company = await prisma.company.findUnique({
       where: {
         userId: session.userId
@@ -31,9 +35,12 @@ export const createScheduleRoute = new Elysia().use(authPlugin).post(
     }
 
     const [error, schedule] = await safeAsync(() =>
-      prisma.schedule.create({
-        data: {
+      prisma.schedule.update({
+        where: {
           companyId: company.id,
+          id: params.id
+        },
+        data: {
           weekDay: body.weekDay,
           startTime: body.startTime,
           endTime: body.endTime
@@ -42,8 +49,8 @@ export const createScheduleRoute = new Elysia().use(authPlugin).post(
     )
 
     if (error) {
-      return status(500, {
-        message: `Erro ao criar agenda: ${error.message}`
+      return status(400, {
+        message: `Erro ao atualizar agenda: ${error.message}`
       })
     }
 
@@ -53,6 +60,9 @@ export const createScheduleRoute = new Elysia().use(authPlugin).post(
   },
   {
     auth: true,
-    body: createScheduleSchema
+    body: editScheduleSchema,
+    params: z.object({
+      id: z.cuid2()
+    })
   }
 )
