@@ -1,47 +1,42 @@
-import { authRoutes } from "@/modules/auth/auth.routes"
-import { notificationRoutes } from "@/modules/notifications/notification.routes"
-import { AppError } from "@/shared/errors/app.error"
+import { env } from "@/env"
+import { schedulesRoutes } from "@/http/schedules"
+import { servicesRoutes } from "@/http/services"
 import cors from "@elysiajs/cors"
-import { APIError as BetterAuthApiError } from "better-auth"
 import Elysia from "elysia"
+import { notficationsRoutes } from "@/http/notifications"
+import { authRoutes } from "@/http/auth"
+import { auth } from "@/lib/auth"
 
 export const app = new Elysia()
-  .onError(({ code, error }) => {
-    if (code === "VALIDATION" || code === "NOT_FOUND") {
+  .onError(({ code, error, request }) => {
+    if (code === "VALIDATION") {
       return {
-        statusCode: error.status,
-        code,
-        message: error.message
+        message: error.messageValue?.message
       }
     }
 
-    if (error instanceof AppError) {
-      return {
-        statusCode: error.statusCode,
-        code: error.code,
-        message: error.message
-      }
-    }
+    if (code === "NOT_FOUND") {
+      const url = new URL(request.url)
 
-    if (error instanceof BetterAuthApiError) {
       return {
-        statusCode: error.statusCode,
-        code: error.body?.code,
-        message: error.message
+        message: `Rota não encontrada: ${url.pathname}`
       }
-    }
-
-    return {
-      statusCode: 500,
-      code: "INTERNAL_ERROR",
-      message: "Erro interno do servidor"
     }
   })
   .use(
     cors({
-      allowedHeaders: ["Content-Type", "Authorization"]
+      allowedHeaders: ["Content-Type", "Authorization"],
+      maxAge: 300,
+      credentials: true,
+      methods: ["POST", "GET", "DELETE", "PATCH", "OPTIONS"],
+      origin: env.FRONTEND_URL
     })
   )
+  .mount(auth.handler)
+  .use(notficationsRoutes)
+  .use(schedulesRoutes)
+  .use(servicesRoutes)
   .use(authRoutes)
-  .use(notificationRoutes)
-  .listen(3333)
+  .listen(env.PORT, ({ url }) => {
+    console.log(`Servidor rodando: ${url}`)
+  })

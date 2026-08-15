@@ -1,12 +1,10 @@
-import { env } from "@/shared/env"
-import { prisma } from "@/shared/database/prisma"
+import { env } from "@/env"
+import { prisma } from "@/lib/prisma"
 import { prismaAdapter } from "better-auth/adapters/prisma"
 import { betterAuth } from "better-auth/minimal"
-import { nextCookies } from "better-auth/next-js"
 import { phoneNumber } from "better-auth/plugins"
-import { phoneValidator } from "@/shared/utils/phone-validator"
-import { systemMessage } from "@/shared/utils/system-message"
-import { NotificationController } from "@/modules/notifications/notification.controller"
+import { phoneValidator } from "@/utils/phone-validator"
+import { systemMessage } from "@/utils/system-message"
 
 export const auth = betterAuth({
   baseURL: env.BETTER_AUTH_URL,
@@ -24,19 +22,19 @@ export const auth = betterAuth({
     autoSignIn: false
   },
   plugins: [
-    nextCookies(),
     phoneNumber({
       requireVerification: true,
       phoneNumberValidator: (phone: string) => phoneValidator(phone),
       sendOTP: async data => {
-        const controller = new NotificationController()
-
-        await controller.sendWhatsappNotification({
-          number: data.phoneNumber,
-          text: systemMessage(
-            `Insira o código a seguir para confirmar seu número no Agendei: ${data.code}`,
-            "validation"
-          )
+        await fetch("http://localhost:3333/notifications", {
+          method: "POST",
+          body: JSON.stringify({
+            number: data.phoneNumber,
+            text: systemMessage(
+              `Insira o código a seguir para confirmar seu número no Agendei: ${data.code}`,
+              "validation"
+            )
+          })
         })
       }
     })

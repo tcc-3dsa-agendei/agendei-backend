@@ -1,0 +1,68 @@
+import { prisma } from "@/lib/prisma"
+import { authPlugin } from "@/plugins/auth-plugin"
+import { safeAsync } from "@/utils/safe"
+import Elysia from "elysia"
+import z from "zod"
+
+const editScheduleSchema = z.strictObject({
+  weekDay: z.number().int().min(0).max(6).optional(),
+  startTime: z
+    .string()
+    .regex(/^([01]\d|2[0-3]):([0-5]\d)$/, "Horário inválido")
+    .optional(),
+  endTime: z
+    .string()
+    .regex(/^([01]\d|2[0-3]):([0-5]\d)$/, "Horário inválido")
+    .optional()
+})
+
+export const editScheduleRoute = new Elysia().use(authPlugin).patch(
+  "/:id",
+  async ({ session, status, body, params }) => {
+    const company = await prisma.company.findUnique({
+      where: {
+        userId: session.userId
+      },
+      select: {
+        id: true
+      }
+    })
+
+    if (!company) {
+      return status(404, {
+        message: "É necessário ter uma empresa para continuar"
+      })
+    }
+
+    const [error, schedule] = await safeAsync(() =>
+      prisma.schedule.update({
+        where: {
+          companyId: company.id,
+          id: params.id
+        },
+        data: {
+          weekDay: body.weekDay,
+          startTime: body.startTime,
+          endTime: body.endTime
+        }
+      })
+    )
+
+    if (error) {
+      return status(400, {
+        message: `Erro ao atualizar agenda: ${error.message}`
+      })
+    }
+
+    return {
+      data: schedule
+    }
+  },
+  {
+    auth: true,
+    body: editScheduleSchema,
+    params: z.object({
+      id: z.cuid2()
+    })
+  }
+)
