@@ -1,4 +1,4 @@
-import { drizzle } from "drizzle-orm/better-sqlite3"
+import { drizzle } from "drizzle-orm/libsql"
 import * as schema from "@/drizzle/schema"
 import { env } from "@/env"
 
