@@ -1,0 +1,7 @@
+export * from "@/drizzle/schema/account"
+export * from "@/drizzle/schema/appointment"
+export * from "@/drizzle/schema/schedule"
+export * from "@/drizzle/schema/service"
+export * from "@/drizzle/schema/session"
+export * from "@/drizzle/schema/user"
+export * from "@/drizzle/schema/verification"

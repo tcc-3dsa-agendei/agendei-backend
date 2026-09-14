@@ -1,0 +1,46 @@
+{
+  "name": "agendei-backend",
+  "private": true,
+  "license": "ISC",
+  "author": {
+    "name": "Vitor Felicio",
+    "email": "desenvolvedorvitor67@gmail.com"
+  },
+  "type": "module",
+  "module": "src/index.ts",
+  "scripts": {
+    "check": "biome check --write",
+    "db:generate": "bunx --bun drizzle-kit generate",
+    "db:migrate": "bunx --bun drizzle-kit migrate",
+    "db:studio": "bunx --bun drizzle-kit studio",
+    "dev": "bun run --watch src/index.ts",
+    "prepare": "husky"
+  },
+  "dependencies": {
+    "@brazilian-utils/brazilian-utils": "2.3.0",
+    "@elysia/cors": "1.4.2",
+    "better-auth": "1.7.4",
+    "better-result": "3.0.1",
+    "better-sqlite3": "13.0.3",
+    "drizzle-orm": "0.45.2",
+    "elysia": "1.4.30",
+    "tslog": "5.2.0",
+    "zod": "4.6.2"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.5.13",
+    "@types/bun": "1.4.2",
+    "drizzle-kit": "0.31.10",
+    "husky": "9.1.7"
+  },
+  "peerDependencies": {
+    "typescript": "6.0.3"
+  },
+  "devEngines": {
+    "packageManager": {
+      "name": "bun",
+      "version": "1.4.2",
+      "onFail": "error"
+    }
+  }
+}

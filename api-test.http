@@ -1,0 +1,18 @@
+### Criar um usuário
+POST http://localhost:3333/api/auth/sign-up/email
+Content-Type: application/json
+
+{
+  "name": "Usuário teste",
+  "email": "usuarioteste@email.com",
+  "password": "usuario-teste-senha",
+  "cnpj": "40463990000119"
+}
+
+### Listar todas as agendas
+GET http://localhost:3333/agendas
+Content-Type: application/json
+
+### Listar uma agenda pelo ID
+GET http://localhost:3333/agendas/01a0979b-4ff5-759a-bf24-d1792ab4243e
+Content-Type: application/json
