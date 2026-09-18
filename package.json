@@ -10,9 +10,9 @@
   "module": "src/index.ts",
   "scripts": {
     "check": "biome check --write",
-    "db:generate": "npx drizzle-kit generate",
-    "db:migrate": "npx drizzle-kit migrate",
-    "db:studio": "npx drizzle-kit studio",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:studio": "drizzle-kit studio",
     "dev": "tsx watch src/index.ts",
     "prepare": "husky"
   },
@@ -41,14 +41,9 @@
   },
   "devEngines": {
     "packageManager": {
-      "name": "npm",
-      "version": "12.0.2",
+      "name": "pnpm",
+      "version": "12.4.2",
       "onFail": "error"
     }
-  },
-  "allowScripts": {
-    "esbuild@0.18.20": true,
-    "esbuild@0.25.12": true,
-    "esbuild@0.28.2": true
   }
 }
